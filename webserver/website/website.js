@@ -1,7 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 module.exports = function (req, res, next) {
-    if (!fs.existsSync(`./html`)) {
+    if (req.path == '/') req.path = "/index.html"
+
+    if (!fs.existsSync(`./html${req.path}`)) {
         try {
             console.log("i love reks: " + req.url)
             res.sendFile(path.join(__dirname, "/error/404.html"), (err) => {
@@ -15,7 +17,7 @@ module.exports = function (req, res, next) {
     }
     else {
         try {
-
+            
         } catch (error) {
             console.log(error)
         }
