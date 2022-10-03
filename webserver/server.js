@@ -14,7 +14,11 @@ app.use(function apiHandler(req, res, next) {
 app.use(function websiteHandler(req, res, next) {
     if (req.path != '/api') return next()
     if (req.method === 'GET') {
-        
+        if (!fs.existsSync(`./website/html${req.path}`)) {
+            res.sendFile("./website/error/404.html", (err) => {
+                console.log(err)
+            })
+        }
     }
 })
 
